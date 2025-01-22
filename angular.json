@@ -32,10 +32,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/user/src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-
-            ]
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -105,10 +102,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/user/src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-
-            ]
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
           }
         }
       }
@@ -142,10 +136,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/admin/src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-
-            ]
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -215,10 +206,7 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/admin/src/styles.scss"
             ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-
-            ]
+            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
           }
         }
       }

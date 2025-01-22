@@ -1,0 +1,59 @@
+nav {
+  background: linear-gradient(135deg, #6d47ff, #d4145a);
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  margin-right: 1.5rem;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #ffd700 !important;
+  transform: scale(1.1);
+}
+
+.nav-link.active {
+  color: #ffd700 !important;
+  border-bottom: 2px solid #ffd700;
+}
+
+.navbar-toggler {
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='%23FFF' class='bi bi-list' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M3 12.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E");
+}
+
+.btn-modern {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-modern:hover {
+  background-color: #ffd700;
+  color: #910340;
+  transform: translateY(-3px);
+}

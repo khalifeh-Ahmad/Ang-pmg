@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApi:'http://localhost:8080/tasks'
+  baseUrl: 'https://bc-crud.onrender.com/',
+  baseApi: 'http://localhost:8080/tasks',
 };
 
 /*

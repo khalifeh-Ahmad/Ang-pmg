@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private srv: LoginService,
+    private router: Router
+  ) {}
 
   loginFrm!: FormGroup;
   ngOnInit(): void {
@@ -25,9 +32,30 @@ export class LoginComponent implements OnInit {
           Validators.maxLength(15),
         ],
       ],
+      role: ['user'],
     });
   }
   login() {
-    console.log(this.loginFrm.value);
+    this.srv.login(this.loginFrm.value).subscribe(
+      (res) => {
+        this.router.navigate(['/tasks']);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully',
+        });
+      },
+      (error) => {}
+    );
   }
 }
