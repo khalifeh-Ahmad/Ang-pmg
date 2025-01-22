@@ -1,0 +1,95 @@
+// General Styling
+.login-page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  background: #f8f9fa;
+
+  .row {
+    width: 80%;
+    max-width: 1000px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  // Left Section
+  .image-section {
+    position: relative;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+  }
+
+  // Right Section
+  .form-section {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .box {
+      width: 80%;
+      padding: 20px;
+      text-align: center;
+
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        color: #6c757d;
+      }
+
+      mat-form-field {
+        mat-label {
+          font-size: 14px;
+          color: #495057;
+        }
+
+        input {
+          font-size: 14px;
+        }
+      }
+
+      .login-button {
+        font-size: 16px;
+        font-weight: bold;
+        background: linear-gradient(to right, #007bff, #0056b3);
+        color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        border: none;
+        &:hover {
+          background: #0056b3;
+        }
+      }
+    }
+  }
+}
+
+// Responsiveness
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+
+    .image-section {
+      height: 200px;
+    }
+
+    .form-section {
+      padding: 20px;
+    }
+  }
+}
