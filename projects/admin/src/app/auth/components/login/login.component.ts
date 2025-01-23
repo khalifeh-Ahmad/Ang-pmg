@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { loginResponse } from '../../context/DTOs';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private srv: LoginService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   loginFrm!: FormGroup;
@@ -36,8 +39,11 @@ export class LoginComponent implements OnInit {
     });
   }
   login() {
+    this.spinner.show();
     this.srv.login(this.loginFrm.value).subscribe(
-      (res) => {
+      (res: any) => {
+        localStorage.setItem('token', res.token);
+        this.spinner.hide();
         this.router.navigate(['/tasks']);
         const Toast = Swal.mixin({
           toast: true,
@@ -55,7 +61,15 @@ export class LoginComponent implements OnInit {
           title: 'Signed in successfully',
         });
       },
-      (error) => {}
+      (er) => {
+        this.spinner.hide();
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: er.error.message,
+          footer: er.message,
+        });
+      }
     );
   }
 }

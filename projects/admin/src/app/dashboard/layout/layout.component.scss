@@ -57,3 +57,78 @@ nav {
   color: #910340;
   transform: translateY(-3px);
 }
+
+/**Foooooooooooter***/
+/* Footer Styling */
+.footer {
+  background: linear-gradient(135deg, #2c2c54, #40407a);
+  color: #fff;
+  padding: 2rem 1rem;
+  font-family: "Roboto", sans-serif;
+  margin-top: 1.5rem;
+}
+
+.footer h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.footer .footer-brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffd700;
+}
+
+.footer .footer-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #ffd700;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ff9f1a;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  font-size: 2.5rem;
+  color: #ffd700;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  color: #ff9f1a;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+}
