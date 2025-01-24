@@ -99,7 +99,7 @@ export class ListTasksComponent implements OnInit {
     { name: 'Complete', id: 1 },
     { name: 'In-Prossing', id: 2 },
   ];
-  constructor(public dialog: MatDialog, private srv: TasksService) {}
+  constructor(public dlg: MatDialog, private srv: TasksService) {}
 
   ngOnInit(): void {
     this.getAllTasks();
@@ -108,11 +108,19 @@ export class ListTasksComponent implements OnInit {
   getAllTasks() {
     this.srv.getTasks().subscribe(
       (res) => {
-        console.log(res);
+        //console.log(res);
       },
       (er) => {
-        alert(JSON.stringify(er.message));
+        console.log(JSON.stringify(er.message));
       }
     );
+  }
+
+  addTask() {
+    const dlgRef = this.dlg.open(AddTaskComponent, {
+      width: '600px',
+      height:'500px'
+    });
+    dlgRef.afterClosed().subscribe((res) => {});
   }
 }
