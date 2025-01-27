@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { TasksService } from '../../services/tasks.service';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class AddTaskComponent implements OnInit {
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private srv: TasksService,
     private spnr: NgxSpinnerService,
@@ -33,11 +38,27 @@ export class AddTaskComponent implements OnInit {
 
   createForm() {
     this.newTaskFrm = this.fb.group({
-      title: ['', Validators.required, Validators.minLength(5)],
-      userId: ['', Validators.required],
-      image: ['', Validators.required],
-      description: ['', Validators.required],
-      deadline: ['', Validators.required],
+      title: [
+        this.data?.title || '',
+        [Validators.required, Validators.minLength(5)],
+      ],
+      userId: [this.data?.userId._id || '', [Validators.required]],
+      image: [
+        this.data?.image || '',
+        [Validators.required, Validators.minLength(5)],
+      ],
+      description: [
+        this.data?.description || '',
+        [Validators.required, Validators.minLength(5)],
+      ],
+      deadline: [
+        this.data
+          ? new Date(
+              this.data?.deadline.split('-').reverse().join('-')
+            ).toISOString()
+          : '',
+        [Validators.required, Validators.minLength(5)],
+      ],
     });
   }
 
@@ -45,28 +66,23 @@ export class AddTaskComponent implements OnInit {
     this.fileName = e.target.value;
     this.newTaskFrm.get('image')?.setValue(e.target.files[0]);
   }
-  createTask() {
+
+  taskOperation() {
     this.spnr.show();
     let dataModel = this.createFrmData();
-    this.srv.createTask(dataModel).subscribe(
+    const taskOperation = this.data?._id
+      ? this.srv.updateTask(dataModel, this.data._id)
+      : this.srv.createTask(dataModel);
+
+    taskOperation.subscribe(
       (res) => {
         this.spnr.hide();
         this.dialog.close(true);
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
-        Toast.fire({
-          icon: 'success',
-          title: 'Task Added successfully',
-        });
+        this.handleSuccess(
+          this.data?._id
+            ? 'Task Updated Successfully'
+            : 'Task Added Successfully'
+        );
       },
       (er) => {
         this.spnr.hide();
@@ -94,5 +110,50 @@ export class AddTaskComponent implements OnInit {
       }
     });
     return frmData;
+  }
+
+  // updateTask() {
+  //   this.spnr.show();
+  //   let dataModel = this.createFrmData();
+
+  //   this.srv.updateTask(dataModel, this.data._id).subscribe(
+  //     (res) => {
+  //       this.spnr.hide();
+  //       this.dialog.close(true);
+  //       this.handleSuccess('Task Updated Successfully');
+  //     },
+  //     (er) => {
+  //       this.spnr.hide();
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Oops...',
+  //         text: er.error.message,
+  //         footer: er.message,
+  //       });
+  //     }
+  //   );
+  // }
+
+  handleSuccess(message: string) {
+    this.spnr.hide();
+    this.dialog.close(true);
+    Swal.fire({
+      icon: 'success',
+      title: message,
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+  }
+
+  handleError(er: any) {
+    this.spnr.hide();
+    Swal.fire({ icon: 'error', title: 'Oops...', text: er.error.message });
   }
 }

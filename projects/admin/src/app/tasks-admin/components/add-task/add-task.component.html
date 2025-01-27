@@ -64,11 +64,20 @@
       <button
         mat-flat-button
         class="btn btn-success py-1 px-5 mx-2"
-        (click)="createTask()"
+        (click)="taskOperation()"
         [disabled]="newTaskFrm.invalid"
       >
-        Create
+        {{ !data ? "Create" : "Update" }}
       </button>
+
+      <!-- <button
+        *ngIf="data"
+        mat-flat-button
+        class="btn btn-success py-1 px-5 mx-2"
+        (click)="taskOperation()"
+      >
+        Update
+      </button> -->
 
       <button mat-flat-button matDialogClose class="btn btn-danger py-1 px-5">
         Close

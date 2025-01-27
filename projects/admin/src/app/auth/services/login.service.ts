@@ -10,6 +10,9 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   login(model: login) {
-    return this.http.post(environment.baseUrl + 'auth/login', model);
+    return this.http.post(
+      environment.baseUrl.replace('tasks', 'auth') + 'login',
+      model
+    );
   }
 }

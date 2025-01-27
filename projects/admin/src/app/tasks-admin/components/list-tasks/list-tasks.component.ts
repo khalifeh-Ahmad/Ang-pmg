@@ -4,12 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { TasksService } from '../../services/tasks.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-export interface PeriodicElement {
-  title: string;
-  user: string;
-  deadLineDate: string;
-  status: string;
-}
 
 @Component({
   selector: 'app-list-tasks',
@@ -73,5 +67,35 @@ export class ListTasksComponent implements OnInit {
         this.getAllTasks();
       }
     });
+  }
+
+  updateTask(task: any) {
+    const dlgRef = this.dlg.open(AddTaskComponent, {
+      width: '600px',
+      height: '500px',
+      data: task,
+    });
+
+    dlgRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getAllTasks();
+      }
+    });
+  }
+
+  deleteTask(id: any) {
+    this.spn.show();
+    this.srv.deleteTask(id).subscribe(
+      (res) => {
+        this.spn.hide();
+        alert(JSON.stringify(res));
+        console.log(res);
+        this.getAllTasks();
+      },
+      (er) => {
+        this.spn.hide();
+        console.log(er);
+      }
+    );
   }
 }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://bc-crud.onrender.com/',
+  baseUrl: 'https://bc-crud.onrender.com/tasks/',
 };
 
 /*

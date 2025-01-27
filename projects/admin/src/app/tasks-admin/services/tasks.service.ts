@@ -10,9 +10,16 @@ export class TasksService {
   constructor(private http: HttpClient) {}
 
   getTasks() {
-    return this.http.get(environment.baseUrl + 'tasks/all-tasks');
+    return this.http.get(environment.baseUrl + 'all-tasks');
   }
   createTask(model: any) {
-    return this.http.post(environment.baseUrl + 'tasks/add-task', model);
+    return this.http.post(environment.baseUrl + 'add-task', model);
+  }
+  updateTask(dataModel: any, id: any) {
+    return this.http.put(environment.baseUrl + 'edit-task/' + id, dataModel);
+  }
+
+  deleteTask(id: any) {
+    return this.http.delete(environment.baseUrl + 'delete-task/' + id);
   }
 }
