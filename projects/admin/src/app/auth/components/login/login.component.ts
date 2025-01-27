@@ -4,7 +4,6 @@ import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { loginResponse } from '../../context/DTOs';
 
 @Component({
   selector: 'app-login',

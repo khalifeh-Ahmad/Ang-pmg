@@ -65,11 +65,14 @@
         mat-flat-button
         class="btn btn-success py-1 px-5 mx-2"
         (click)="createTask()"
+        [disabled]="newTaskFrm.invalid"
       >
         Create
       </button>
 
-      <button mat-flat-button class="btn btn-danger py-1 px-5">Close</button>
+      <button mat-flat-button matDialogClose class="btn btn-danger py-1 px-5">
+        Close
+      </button>
     </div>
   </footer>
 </div>
