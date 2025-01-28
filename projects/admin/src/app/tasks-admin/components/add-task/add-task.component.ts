@@ -9,6 +9,7 @@ import { TasksService } from '../../services/tasks.service';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-add-task',
@@ -32,8 +33,11 @@ export class AddTaskComponent implements OnInit {
   ];
   fileName = '';
   newTaskFrm!: FormGroup;
+  originalFormValue: any;
+
   ngOnInit(): void {
     this.createForm();
+    this.originalFormValue = this.newTaskFrm.getRawValue();
   }
 
   createForm() {
@@ -112,28 +116,26 @@ export class AddTaskComponent implements OnInit {
     return frmData;
   }
 
-  // updateTask() {
-  //   this.spnr.show();
-  //   let dataModel = this.createFrmData();
-
-  //   this.srv.updateTask(dataModel, this.data._id).subscribe(
-  //     (res) => {
-  //       this.spnr.hide();
-  //       this.dialog.close(true);
-  //       this.handleSuccess('Task Updated Successfully');
-  //     },
-  //     (er) => {
-  //       this.spnr.hide();
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Oops...',
-  //         text: er.error.message,
-  //         footer: er.message,
-  //       });
-  //     }
-  //   );
-  // }
-
+  onClose() {
+    if (this.newTaskFrm.dirty && !this.isFormUnchanged()) {
+      const dlgRef = this.matDialog.open(ConfirmationComponent, {
+        width: '600px',
+        disableClose: true,
+      });
+      dlgRef.afterClosed().subscribe((res) => {
+        if (res) {
+        }
+      });
+    } else {
+      this.dialog.close();
+    }
+  }
+  isFormUnchanged() {
+    const currentValue = this.newTaskFrm.getRawValue();
+    return (
+      JSON.stringify(currentValue) === JSON.stringify(this.originalFormValue)
+    );
+  }
   handleSuccess(message: string) {
     this.spnr.hide();
     this.dialog.close(true);

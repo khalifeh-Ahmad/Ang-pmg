@@ -61,6 +61,7 @@ export class ListTasksComponent implements OnInit {
     const dlgRef = this.dlg.open(AddTaskComponent, {
       width: '600px',
       height: '500px',
+      disableClose: true, //to disable closing the dialog when click on screen
     });
     dlgRef.afterClosed().subscribe((res) => {
       if (res) {

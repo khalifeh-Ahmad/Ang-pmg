@@ -1,7 +1,7 @@
 <div class="p-4">
   <header class="d-flex justify-content-between align-items-center">
     <h1 class="m-0">Add New Task</h1>
-    <button mat-flat-button matDialogClose class="text-danger">
+    <button mat-flat-button (click)="onClose()" class="text-danger">
       <mat-icon>close</mat-icon>
     </button>
   </header>
@@ -70,16 +70,11 @@
         {{ !data ? "Create" : "Update" }}
       </button>
 
-      <!-- <button
-        *ngIf="data"
+      <button
         mat-flat-button
-        class="btn btn-success py-1 px-5 mx-2"
-        (click)="taskOperation()"
+        (click)="onClose()"
+        class="btn btn-danger py-1 px-5"
       >
-        Update
-      </button> -->
-
-      <button mat-flat-button matDialogClose class="btn btn-danger py-1 px-5">
         Close
       </button>
     </div>
