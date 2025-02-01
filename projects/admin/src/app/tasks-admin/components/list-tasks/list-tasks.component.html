@@ -10,13 +10,17 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Search</mat-label>
-          <input matInput placeholder="Search by title" />
+          <input
+            matInput
+            (input)="updateFilter('keyword', $event.target, true)"
+            placeholder="Search by title"
+          />
         </mat-form-field>
       </div>
       <div class="col-md-3">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>By User</mat-label>
-          <mat-select>
+          <mat-select (selectionChange)="updateFilter('userId', $event.value)">
             <mat-option *ngFor="let user of users" [value]="user?.id">
               {{ user?.name }}
             </mat-option>
@@ -26,8 +30,8 @@
       <div class="col-md-3">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Status</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let item of status" [value]="item?.id">
+          <mat-select (selectionChange)="updateFilter('status', $event.value)">
+            <mat-option *ngFor="let item of status" [value]="item?.name">
               {{ item?.name }}
             </mat-option>
           </mat-select>
@@ -37,8 +41,16 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Date Range</mat-label>
           <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate placeholder="Start date" />
-            <input matEndDate placeholder="End date" />
+            <input
+              matStartDate
+              placeholder="Start date"
+              (dateChange)="dateRangeFilter($event, 'fromDate')"
+            />
+            <input
+              matEndDate
+              placeholder="End date"
+              (dateChange)="dateRangeFilter($event, 'toDate')"
+            />
           </mat-date-range-input>
           <mat-datepicker-toggle
             matSuffix
