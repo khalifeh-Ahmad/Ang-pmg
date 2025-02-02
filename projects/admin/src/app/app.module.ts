@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CoreModule } from './core/core.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,9 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     CoreModule,
+    NgxPaginationModule,
   ],
+  exports: [NgxPaginationModule],
   providers: [],
   bootstrap: [AppComponent],
 })

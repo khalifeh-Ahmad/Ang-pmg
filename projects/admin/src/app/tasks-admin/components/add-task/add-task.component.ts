@@ -7,7 +7,6 @@ import {
 } from '@angular/material/dialog';
 import { TasksService } from '../../services/tasks.service';
 import * as moment from 'moment';
-import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
@@ -21,7 +20,6 @@ export class AddTaskComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private srv: TasksService,
-    private spnr: NgxSpinnerService,
     public dialog: MatDialogRef<AddTaskComponent>,
     public matDialog: MatDialog
   ) {}
@@ -72,7 +70,6 @@ export class AddTaskComponent implements OnInit {
   }
 
   taskOperation() {
-    this.spnr.show();
     let dataModel = this.createFrmData();
     const taskOperation = this.data?._id
       ? this.srv.updateTask(dataModel, this.data._id)
@@ -80,7 +77,6 @@ export class AddTaskComponent implements OnInit {
 
     taskOperation.subscribe(
       (res) => {
-        this.spnr.hide();
         this.dialog.close(true);
         this.handleSuccess(
           this.data?._id
@@ -89,7 +85,6 @@ export class AddTaskComponent implements OnInit {
         );
       },
       (er) => {
-        this.spnr.hide();
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -137,7 +132,6 @@ export class AddTaskComponent implements OnInit {
     );
   }
   handleSuccess(message: string) {
-    this.spnr.hide();
     this.dialog.close(true);
     Swal.fire({
       icon: 'success',
@@ -155,7 +149,6 @@ export class AddTaskComponent implements OnInit {
   }
 
   handleError(er: any) {
-    this.spnr.hide();
     Swal.fire({ icon: 'error', title: 'Oops...', text: er.error.message });
   }
 }

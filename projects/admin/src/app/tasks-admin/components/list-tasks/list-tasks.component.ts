@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { TasksService } from '../../services/tasks.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 
@@ -30,12 +29,17 @@ export class ListTasksComponent implements OnInit {
   ];
   imgPath = 'https://bc-crud.onrender.com/';
   status: any = [{ name: 'Complete' }, { name: 'In-Progress' }];
-  filter: any = {};
+  page: any = 1;
+  total: any;
+  filter: any = {
+    page: this.page,
+    limit: 5,
+  };
   timeOutId: any;
+
   constructor(
     public dlg: MatDialog,
     private srv: TasksService,
-    private spn: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +47,13 @@ export class ListTasksComponent implements OnInit {
   }
 
   getAllTasks() {
-    //this.spn.show();
     this.srv.getTasks(this.filter).subscribe(
       (res: any) => {
-        //this.spn.hide();
         this.dataSource = res.tasks;
+        //  console.log(res)
+        this.total = res.totalItems;
       },
       (er) => {
-        //this.spn.hide();
         console.log(JSON.stringify(er.message));
       }
     );
@@ -84,22 +87,21 @@ export class ListTasksComponent implements OnInit {
   }
 
   deleteTask(id: any) {
-    this.spn.show();
     this.srv.deleteTask(id).subscribe(
       (res) => {
-        this.spn.hide();
         alert(JSON.stringify(res));
         console.log(res);
         this.getAllTasks();
       },
       (er) => {
-        this.spn.hide();
         console.log(er);
       }
     );
   }
 
   updateFilter(key: string, value: any, debounce: boolean = false) {
+    this.page = 1;
+    this.filter['page'] = 1;
     if (debounce) {
       clearTimeout(this.timeOutId);
       this.timeOutId = setTimeout(() => {
@@ -147,10 +149,18 @@ export class ListTasksComponent implements OnInit {
     }
   }
   dateRangeFilter(e: any, type: string) {
+    this.page = 1;
+    this.filter['page'] = 1;
     const formattedDate = moment(e.value).format('YYYY-MM-DD');
     this.filter[type] = formattedDate;
     if (type == 'toDate' && this.filter['toDate'] !== 'Invalid date') {
       this.getAllTasks();
     }
+  }
+
+  changePage(e: any) {
+    this.page = e;
+    this.filter['page'] = e;
+    this.getAllTasks();
   }
 }

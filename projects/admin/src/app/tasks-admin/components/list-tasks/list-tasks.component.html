@@ -130,7 +130,25 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: displayedColumns
+            | paginate
+              : {
+                  id: 'tasks',
+                  itemsPerPage: 5,
+                  currentPage: page,
+                  totalItems: total
+                }
+        "
+      ></tr>
     </table>
+    <div class="d-flex justify-content-center mt-5">
+      <pagination-controls
+        (pageChange)="changePage($event)" id="tasks"
+      ></pagination-controls>
+    </div>
   </div>
 </div>
