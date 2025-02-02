@@ -37,10 +37,7 @@ export class ListTasksComponent implements OnInit {
   };
   timeOutId: any;
 
-  constructor(
-    public dlg: MatDialog,
-    private srv: TasksService,
-  ) {}
+  constructor(public dlg: MatDialog, private srv: TasksService) {}
 
   ngOnInit(): void {
     this.getAllTasks();
@@ -87,16 +84,11 @@ export class ListTasksComponent implements OnInit {
   }
 
   deleteTask(id: any) {
-    this.srv.deleteTask(id).subscribe(
-      (res) => {
-        alert(JSON.stringify(res));
-        console.log(res);
-        this.getAllTasks();
-      },
-      (er) => {
-        console.log(er);
-      }
-    );
+    this.srv.deleteTask(id).subscribe((res) => {
+      alert(JSON.stringify(res));
+      //console.log(res);
+      this.getAllTasks();
+    });
   }
 
   updateFilter(key: string, value: any, debounce: boolean = false) {

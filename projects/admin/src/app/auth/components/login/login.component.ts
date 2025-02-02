@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private srv: LoginService,
-    private router: Router,
+    private router: Router
   ) {}
 
   loginFrm!: FormGroup;
@@ -36,34 +36,24 @@ export class LoginComponent implements OnInit {
     });
   }
   login() {
-    this.srv.login(this.loginFrm.value).subscribe(
-      (res: any) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/tasks']);
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
-        Toast.fire({
-          icon: 'success',
-          title: 'Signed in successfully',
-        });
-      },
-      (er) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: er.error.message,
-          footer: er.message,
-        });
-      }
-    );
+    this.srv.login(this.loginFrm.value).subscribe((res: any) => {
+      localStorage.setItem('token', res.token);
+      this.router.navigate(['/tasks']);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully',
+      });
+    });
   }
 }

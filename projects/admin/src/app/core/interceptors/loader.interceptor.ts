@@ -16,10 +16,18 @@ export class LoaderInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    this.spnr.show();
+    const excludedUrls = ['/tasks']; // Add URLs to exclude
+    const shouldSkip = excludedUrls.some((url) => request.url.includes(url));
+    //const skipLoader = request.headers.get('X-Skip-Loader');
+
+    if (!shouldSkip) {
+      this.spnr.show();
+    }
     return next.handle(request).pipe(
       finalize(() => {
-        this.spnr.hide();
+        if (!shouldSkip) {
+          this.spnr.hide();
+        }
       })
     );
   }
