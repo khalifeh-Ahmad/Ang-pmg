@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "title": "All Tasks",
+    "addTask": "Add Task"
+  },
+  "users": {},
+  "general": {
+    "loading": "Loading"
+  },
+  "toaster": {},
+  "buttons": {}
+}

@@ -1,7 +1,7 @@
 <div class="mt-4">
   <div class="d-flex justify-content-end">
     <button class="btn-modern addTask" mat-raised-button (click)="addTask()">
-      Add Task
+      {{ "tasks.addTask" | translate }}
     </button>
   </div>
 
@@ -147,7 +147,8 @@
     </table>
     <div class="d-flex justify-content-center mt-5">
       <pagination-controls
-        (pageChange)="changePage($event)" id="tasks"
+        (pageChange)="changePage($event)"
+        id="tasks"
       ></pagination-controls>
     </div>
   </div>

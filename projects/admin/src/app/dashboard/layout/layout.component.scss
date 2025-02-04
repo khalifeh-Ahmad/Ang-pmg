@@ -58,6 +58,56 @@ nav {
   transform: translateY(-3px);
 }
 
+.extras {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Language Dropdown Styling */
+.language-select {
+  background: linear-gradient(135deg, #ff6b6b, #d4145a);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  appearance: none; /* Removes default arrow in some browsers */
+  position: relative;
+  text-align: center;
+}
+
+/* Add a custom dropdown arrow */
+.language-select::after {
+  content: "▼";
+  position: absolute;
+  right: 15px;
+  pointer-events: none;
+  color: #fff;
+  font-size: 12px;
+}
+
+/* Hover and Focus Effects */
+.language-select:hover,
+.language-select:focus {
+  background: linear-gradient(135deg, #ff4081, #e91e63);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Dropdown Option Styling */
+.language-select option {
+  color: #333;
+  background: #fff;
+  padding: 10px;
+  font-weight: normal;
+}
+
 /**Foooooooooooter***/
 /* Footer Styling */
 .footer {

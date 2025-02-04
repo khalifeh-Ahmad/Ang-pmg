@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg">
-  <div class="container">
+  <div
+    class="container-fluid d-flex justify-content-between align-items-center"
+  >
     <a class="navbar-brand" routerLink="/">Tasks</a>
 
     <button
@@ -31,9 +33,18 @@
           >
         </li>
       </ul>
-      <div class="nav-item">
-        <a class="btn btn-modern" routerLink="/login">Logout</a>
-      </div>
+    </div>
+
+    <div class="extras pr-2" >
+      <select class="language-select" (change)="onLanguageChange($event)">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ar">عربي</option>
+      </select>
+    </div>
+    <div class="nav-item">
+      <a class="btn btn-modern" routerLink="/login">Logout</a>
     </div>
   </div>
 </nav>

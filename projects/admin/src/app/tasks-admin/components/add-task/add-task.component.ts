@@ -84,14 +84,6 @@ export class AddTaskComponent implements OnInit {
             : 'Task Added Successfully'
         );
       },
-      (er) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: er.error.message,
-          footer: er.message,
-        });
-      }
     );
   }
   createFrmData() {
@@ -148,7 +140,7 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-  handleError(er: any) {
-    Swal.fire({ icon: 'error', title: 'Oops...', text: er.error.message });
-  }
+  // handleError(er: any) {
+  //   Swal.fire({ icon: 'error', title: 'Oops...', text: er.error.message });
+  // }
 }

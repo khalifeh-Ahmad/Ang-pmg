@@ -1,0 +1,9 @@
+{
+  "tasks": { "title": "جميع المهمات", "addTask": "إضافة مهمة" },
+  "users": {},
+  "general": {
+    "loading": "انتظار"
+  },
+  "toaster": {},
+  "buttons": {}
+}
